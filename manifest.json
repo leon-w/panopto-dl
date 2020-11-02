@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+  "name": "Panopto Downloader",
+  "version": "1.0",
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "View downloadable Videos"
+  },
+  "background": {
+    "scripts": [
+      "src/background.js"
+    ]
+  },
+  "permissions": [
+    "https://tum.cloud.panopto.eu/*",
+    "https://*.cloudfront.net/*",
+    "webRequest",
+    "tabs"
+  ]
+}

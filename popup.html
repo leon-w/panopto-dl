@@ -6,13 +6,40 @@
                 white-space: nowrap;
                 padding: 0 5px;
             }
+            h1 {
+                white-space: nowrap;
+                font-size: 15px;
+            }
+
+            i.icon {
+                background-size: 16px 16px;
+                display: inline-block;
+                height: 16px;
+                width: 16px;
+                vertical-align: text-bottom;
+                margin-right: 6px;
+            }
+            .icon.panopto {
+                background-image: url(img/panopto.png);
+            }
+            .icon.bbb {
+                background-image: url(img/bbb.png);
+            }
+            .icon.tum-live {
+                background-image: url(img/tum.png);
+            }
         </style>
     </head>
     <body>
-        <table>
-            <thead><th>Time</th><th>Video</th><th>Delete</th></thead>
+        <table id="table" style="display: none;">
+            <thead>
+                <th>Time</th>
+                <th>Video</th>
+                <th>Delete</th>
+            </thead>
             <tbody id="table_body"></tbody>
         </table>
+        <h1 id="no_videos">No videos to download.</h1>
     </body>
     <script src="lib/jquery-3.5.1.min.js"></script>
     <script src="src/popup.js"></script>

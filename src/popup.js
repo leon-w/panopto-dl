@@ -12,32 +12,34 @@ function formatDelta(time) {
     return rtf.format(-delta, "hour");
 }
 
-function generateCommand(video) {
-    return `ffmpeg -i "${video.url}" -c copy -bsf:a aac_adtstoasc "${video.title}.mp4"`;
-}
-
 function render() {
     chrome.runtime.sendMessage({ type: "get_videos" }, videos => {
+        if (videos.length == 0) {
+            $("#no_videos").show();
+            $("#table").hide();
+        } else {
+            $("#no_videos").hide();
+            $("#table").show();
+        }
+
         const tableBody = $("#table_body");
         tableBody.empty();
         for (let video of videos.reverse()) {
             const tr = $(`
             <tr>
                 <td>${formatDelta(video.ts)}</td>
-                <td class="title"></td>
+                <td class="title"><i class="icon ${video.type}"></i></td>
                 <td class="delete"><a class="delete" href="#">Delete</a></td>
             </tr>`);
 
             $(".title", tr).append(
                 $(`<a href="#">${video.title}.mp4</a>`).click(() => {
-                    navigator.clipboard.writeText(generateCommand(video))
+                    navigator.clipboard.writeText(video.command);
                 })
             );
 
             $(".delete > a", tr).click(() => {
-                chrome.runtime.sendMessage({ type: "delete_video", delete_url: video.url }, () => {
-                    render();
-                });
+                chrome.runtime.sendMessage({ type: "delete_video", data: { deleteId: video.id } }, render);
             });
 
             tableBody.append(tr);

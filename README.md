@@ -1,6 +1,6 @@
 # panopto-dl
 
-A simple chrome extension to generate ffmpeg commands to download videos from panopto.
+A simple chrome extension to generate ffmpeg commands to download videos from TUM panopto / TUM BigBlueButton / TUM live.
 
 ### installation
 
@@ -11,7 +11,7 @@ A simple chrome extension to generate ffmpeg commands to download videos from pa
 
 ### ho to use
 
-* when opening a panopto video, the video source url gets saved, the video title gets fetched from the tab title (wont work properly when using the embedded player)
+* open the video streaming page for a short moment and the video will get registered (embedded players will not work)
 * click the extension icon to view all detected videos
   * click the video title to copy a `ffmpeg` command that will download the video as `.mp4`
   * click delete to remove the video from the list

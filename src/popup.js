@@ -22,6 +22,12 @@ function render() {
             $("#table").show();
         }
 
+        if (videos.length < 2) {
+            $("#download_all").hide();
+        } else {
+            $("#download_all").show();
+        }
+
         const tableBody = $("#table_body");
         tableBody.empty();
         for (let video of videos.reverse()) {
@@ -44,6 +50,14 @@ function render() {
 
             tableBody.append(tr);
         }
+        $("#download_all").click(() =>
+            navigator.clipboard.writeText(
+                videos
+                    .reverse()
+                    .map(v => v.command)
+                    .join(" && \\\n")
+            )
+        );
     });
 }
 

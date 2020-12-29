@@ -1,3 +1,5 @@
+DISCLAIMER: Only use this tool to download videos you have the right to do so.
+
 # panopto-dl
 
 A simple chrome extension to generate ffmpeg commands to download videos from TUM panopto / TUM BigBlueButton / TUM live.

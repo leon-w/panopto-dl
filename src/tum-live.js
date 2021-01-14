@@ -36,7 +36,7 @@ chrome.webRequest.onBeforeRequest.addListener(
                 title += ` (${extra})`;
             }
 
-            const command = `ffmpeg -i "${details.url}" -c copy -bsf:a aac_adtstoasc "${title}.mp4"`;
+            const command = `ffmpeg -i "${details.url}" -c copy -bsf:a aac_adtstoasc "file:${title}.mp4"`;
 
             registerVideo(command, title, "tum-live");
         }

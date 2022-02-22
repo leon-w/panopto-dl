@@ -7,6 +7,6 @@ chrome.webRequest.onBeforeRequest.addListener(
             registerVideo(command, title, "panopto");
         }
     },
-    { urls: ["https://*.cloudfront.net/sessions/*/index.m3u8"] },
+    {urls: ["https://*.cloudfront.net/sessions/*/index.m3u8"]},
     []
 );

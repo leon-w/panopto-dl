@@ -13,8 +13,8 @@ function formatDelta(time) {
 }
 
 function render() {
-    chrome.runtime.sendMessage({ type: "get_videos" }, videos => {
-        if (videos.length == 0) {
+    chrome.runtime.sendMessage({type: "get_videos"}, videos => {
+        if (videos.length === 0) {
             $("#no_videos").show();
             $("#table").hide();
         } else {
@@ -24,8 +24,10 @@ function render() {
 
         if (videos.length < 2) {
             $("#download_all").hide();
+            $("#delete_all").hide();
         } else {
             $("#download_all").show();
+            $("#delete_all").show();
         }
 
         const tableBody = $("#table_body");
@@ -45,7 +47,7 @@ function render() {
             );
 
             $(".delete > a", tr).click(() => {
-                chrome.runtime.sendMessage({ type: "delete_video", data: { deleteId: video.id } }, render);
+                chrome.runtime.sendMessage({type: "delete_video", data: {deleteId: video.id}}, render);
             });
 
             tableBody.append(tr);
@@ -57,6 +59,11 @@ function render() {
                     .map(v => v.command)
                     .join(" && \\\n")
             )
+        );
+        $("#delete_all").click(() =>
+            videos.forEach(v => {
+                chrome.runtime.sendMessage({type: "delete_video", data: {deleteId: v.id}}, render)
+            })
         );
     });
 }

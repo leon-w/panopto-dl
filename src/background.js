@@ -17,7 +17,7 @@ chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
     if (type === "get_videos") {
         sendResponse(allVideos);
     } else if (type === "delete_video") {
-        allVideos = allVideos.filter(v => v.id != data.deleteId);
+        allVideos = allVideos.filter(v => v.id !== data.deleteId);
         sendResponse();
     } else if (type === "register_video") {
         registerVideo(data.command, data.title, data.type);

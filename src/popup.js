@@ -36,8 +36,8 @@ function render() {
             const tr = $(`
             <tr>
                 <td>${formatDelta(video.ts)}</td>
-                <td class="title"><i class="icon ${video.type}"></i></td>
-                <td class="delete"><a class="delete" href="#">Delete</a></td>
+                <td class="title"><i class="icon ${video.type} p-3"></i></td>
+                <td class="delete"><a class="delete btn btn-danger" href="#">Delete</a></td>
             </tr>`);
 
             $(".title", tr).append(

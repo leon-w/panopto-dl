@@ -24,7 +24,7 @@ function registerVideo() {
         return;
     }
 
-    chrome.runtime.sendMessage({ type: "register_video", data: { command, title, type: "bbb" } });
+    chrome.runtime.sendMessage({type: "register_video", data: {command, title, type: "bbb"}});
 }
 
 (async () => {

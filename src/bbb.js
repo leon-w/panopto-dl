@@ -1,8 +1,18 @@
-function registerVideo() {
-    let title = document.getElementById("recording-title").innerText;
+function sanitizeTitle(title) {
+    return title.replace(/\//g, "_");
+}
 
-    const screen = document.querySelector("#deskshare-video source[type^='video/mp4']")?.src;
-    const webcam = document.querySelector("#video source[type^='video/mp4']")?.src;
+function registerVideo() {
+    let title = sanitizeTitle(document.getElementsByClassName("title")?.[0]?.innerText ?? document.title);
+
+    let screen, webcam;
+    for (const { src } of document.getElementsByTagName("video")) {
+        if (src.includes("webcams.mp4")) {
+            webcam = src;
+        } else if (src.includes("deskshare.mp4")) {
+            screen = src;
+        }
+    }
 
     let command = `ffmpeg -i "${screen}" -i "${webcam}" -c:v copy -c:a aac "file:${title}.mp4"`;
 
@@ -10,19 +20,19 @@ function registerVideo() {
         title += "_WEBCAM_ONLY";
         command = `ffmpeg -i "${webcam}" -c copy -bsf:a aac_adtstoasc "file:${title}.mp4"`;
     } else if (screen === undefined && webcam === undefined) {
-        console.log("Unsupported video");
+        console.warn("unsupported playback");
         return;
     }
 
     chrome.runtime.sendMessage({ type: "register_video", data: { command, title, type: "bbb" } });
 }
 
-function waitForLoading() {
-    if (document.getElementById("loading").style.visibility == "hidden") {
-        registerVideo();
-    } else {
-        setTimeout(waitForLoading, 100);
+(async () => {
+    while (true) {
+        if (document.getElementById("player")?.style?.visibility === "") {
+            setTimeout(registerVideo, 500);
+            break;
+        }
+        await new Promise(accept => setTimeout(accept, 100));
     }
-}
-
-waitForLoading();
+})();

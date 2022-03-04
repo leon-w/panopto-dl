@@ -6,6 +6,12 @@
         "default_popup": "popup.html",
         "default_title": "View downloadable Videos"
     },
+    "content_scripts": [
+        {
+            "matches": ["https://balancer.bbb.rbg.tum.de/playback/presentation/2.3/*"],
+            "js": ["src/bbb.js"]
+        }
+    ],
     "background": {
         "service_worker": "background.js",
         "type": "module"

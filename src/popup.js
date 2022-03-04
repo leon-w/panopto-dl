@@ -1,4 +1,4 @@
-import { getVideos, deleteVideo } from "/src/videos.js";
+import { getVideos, deleteVideo, deleteAll } from "/src/videos.js";
 
 function formatDelta(time) {
     const rtf = new Intl.RelativeTimeFormat("en");
@@ -15,13 +15,8 @@ function formatDelta(time) {
 }
 
 function render() {
-<<<<<<< HEAD
     getVideos().then(videos => {
-        if (videos.length == 0) {
-=======
-    chrome.runtime.sendMessage({type: "get_videos"}, videos => {
         if (videos.length === 0) {
->>>>>>> d5b3ac1a57021f392b65a82dd69bacac3473e86e
             $("#no_videos").show();
             $("#table").hide();
         } else {
@@ -30,18 +25,17 @@ function render() {
         }
 
         if (videos.length < 2) {
-            $("#download_all").hide();
-            $("#delete_all").hide();
+            // the d-flex bootstrap class has a !important rule so just calling .hide() wont work
+            $("#multi_button_row").attr("style", "display: none !important");
         } else {
-            $("#download_all").show();
-            $("#delete_all").show();
+            $("#multi_button_row").show();
         }
 
         const tableBody = $("#table_body");
         tableBody.empty();
         for (const video of videos.reverse()) {
             const tr = $(`
-            <tr>
+            <tr class="align-middle">
                 <td>${formatDelta(video.ts)}</td>
                 <td class="title"><i class="icon ${video.type} p-3"></i></td>
                 <td class="delete"><a class="delete btn btn-danger" href="#">Delete</a></td>
@@ -67,11 +61,7 @@ function render() {
                     .join(" && \\\n")
             )
         );
-        $("#delete_all").click(() =>
-            videos.forEach(v => {
-                chrome.runtime.sendMessage({type: "delete_video", data: {deleteId: v.id}}, render)
-            })
-        );
+        $("#delete_all").click(() => deleteAll().then(render));
     });
 }
 

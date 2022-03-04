@@ -2,6 +2,9 @@
 <html>
     <head>
         <style>
+            body {
+                min-width: 450px;
+            }
             i.panopto {
                 background-image: url(img/panopto.png);
                 background-position: center center;
@@ -43,15 +46,15 @@
             <tbody id="table_body"></tbody>
         </table>
     </div>
-        <div class="w-100 d-flex flex-row-reverse p-2">
-            <button id="download_all" href="#" style="display: none" type="button" class="btn btn-primary align-self-end m-1">
+        <div id="multi_button_row" style="display: none !important;" class="w-100 d-flex flex-row-reverse p-2">
+            <button id="download_all" href="#" type="button" class="btn btn-primary align-self-end m-1">
                 Download all
             </button>
-            <button id="delete_all" href="#" style="display: none" type="button" class="btn btn-danger align-self-end m-1">
+            <button id="delete_all" href="#" type="button" class="btn btn-danger align-self-end m-1">
                 Delete all
             </button>
         </div>
-        <h1 class="alert-light m-5 ml-0 mr-0" id="no_videos">No videos to download.</h1>
+        <h1 class="alert-light m-5 ml-0 mr-0 text-center" id="no_videos">No videos to download.</h1>
     </body>
     <script src="lib/jquery-3.5.1.min.js"></script>
     <script src="src/popup.js" type="module"></script>

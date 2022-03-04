@@ -20,6 +20,10 @@ export async function deleteVideo(deleteId) {
     await chrome.storage.local.set({ videos: videos });
 }
 
+export function deleteAll() {
+    return chrome.storage.local.clear();
+}
+
 export function getVideos() {
     return new Promise(resolve => {
         chrome.storage.local.get("videos", ({ videos }) => resolve(videos ?? []));

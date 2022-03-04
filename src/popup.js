@@ -15,8 +15,13 @@ function formatDelta(time) {
 }
 
 function render() {
+<<<<<<< HEAD
     getVideos().then(videos => {
         if (videos.length == 0) {
+=======
+    chrome.runtime.sendMessage({type: "get_videos"}, videos => {
+        if (videos.length === 0) {
+>>>>>>> d5b3ac1a57021f392b65a82dd69bacac3473e86e
             $("#no_videos").show();
             $("#table").hide();
         } else {
@@ -26,8 +31,10 @@ function render() {
 
         if (videos.length < 2) {
             $("#download_all").hide();
+            $("#delete_all").hide();
         } else {
             $("#download_all").show();
+            $("#delete_all").show();
         }
 
         const tableBody = $("#table_body");
@@ -36,8 +43,8 @@ function render() {
             const tr = $(`
             <tr>
                 <td>${formatDelta(video.ts)}</td>
-                <td class="title"><i class="icon ${video.type}"></i></td>
-                <td class="delete"><a class="delete" href="#">Delete</a></td>
+                <td class="title"><i class="icon ${video.type} p-3"></i></td>
+                <td class="delete"><a class="delete btn btn-danger" href="#">Delete</a></td>
             </tr>`);
 
             $(".title", tr).append(
@@ -59,6 +66,11 @@ function render() {
                     .map(v => v.command)
                     .join(" && \\\n")
             )
+        );
+        $("#delete_all").click(() =>
+            videos.forEach(v => {
+                chrome.runtime.sendMessage({type: "delete_video", data: {deleteId: v.id}}, render)
+            })
         );
     });
 }

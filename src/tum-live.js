@@ -17,6 +17,6 @@ chrome.webRequest.onBeforeRequest.addListener(
             registerVideo(command, title, "tum-live");
         }
     },
-    { urls: ["https://stream.lrz.de/vod/_definst_/*/chunklist_*.m3u8"] },
+    {urls: ["https://stream.lrz.de/vod/_definst_/*/chunklist_*.m3u8"]},
     []
 );

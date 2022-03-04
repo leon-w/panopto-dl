@@ -11,7 +11,7 @@ A simple chrome extension to generate ffmpeg commands to download videos from TU
 * enable developer mode
 * click `Load unpacked` and select the extracted folder
 
-### ho to use
+### how to use
 
 * open the video streaming page for a short moment and the video will get registered (embedded players will not work)
 * click the extension icon to view all detected videos

@@ -1,3 +1,5 @@
+import { getVideos, deleteVideo } from "/src/videos.js";
+
 function formatDelta(time) {
     const rtf = new Intl.RelativeTimeFormat("en");
     let delta = Math.round((new Date() - time) / 1000);
@@ -13,7 +15,7 @@ function formatDelta(time) {
 }
 
 function render() {
-    chrome.runtime.sendMessage({ type: "get_videos" }, videos => {
+    getVideos().then(videos => {
         if (videos.length == 0) {
             $("#no_videos").show();
             $("#table").hide();
@@ -30,7 +32,7 @@ function render() {
 
         const tableBody = $("#table_body");
         tableBody.empty();
-        for (let video of videos.reverse()) {
+        for (const video of videos.reverse()) {
             const tr = $(`
             <tr>
                 <td>${formatDelta(video.ts)}</td>
@@ -45,7 +47,7 @@ function render() {
             );
 
             $(".delete > a", tr).click(() => {
-                chrome.runtime.sendMessage({ type: "delete_video", data: { deleteId: video.id } }, render);
+                deleteVideo(video.id).then(render);
             });
 
             tableBody.append(tr);

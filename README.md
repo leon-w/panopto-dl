@@ -10,7 +10,7 @@ A simple chrome extension to generate ffmpeg commands to download videos from TU
 
 ## Installation ⬇️
 
--   download the latest release from the [release page](https://github.com/leon-w/panopto-dl/releases)
+-   download the latest `panopto-dl.zip` file from the [release page](https://github.com/leon-w/panopto-dl/releases)
 -   extract the downloaded archive
 
 -   goto `chrome://extensions`

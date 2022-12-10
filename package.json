@@ -1,0 +1,46 @@
+{
+  "name": "panopto-dl",
+  "version": "2.0.0",
+  "description": "panopto-dl",
+  "scripts": {
+    "watch": "webpack --config webpack/webpack.dev.js --watch",
+    "build": "webpack --config webpack/webpack.prod.js",
+    "clean": "rimraf dist",
+    "lint": "eslint \"src/**/*.{ts,tsx}\""
+  },
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leon-w/panopto-dl.git"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.10.16",
+    "@mui/material": "^5.10.17",
+    "date-fns": "^2.29.3",
+    "filenamify": "^5.1.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "@types/chrome": "0.0.158",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.46.0",
+    "copy-webpack-plugin": "^9.0.1",
+    "eslint": "^8.29.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-import": "^2.26.0",
+    "glob": "^7.1.6",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2 ",
+    "ts-loader": "^8.0.0",
+    "typescript": "^4.4.3 ",
+    "webpack": "^5.61.0",
+    "webpack-cli": "^4.0.0",
+    "webpack-merge": "^5.0.0"
+  }
+}

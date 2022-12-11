@@ -13,10 +13,17 @@ jobs:
             - uses: actions/setup-node@v3
               with:
                   node-version: "18.x"
-            - run: npm ci
-            - run: npm run build
-            - run: mv dist panopto-dl
-            - run: zip -r panopto-dl.zip panopto-dl
+
+            - name: Get short SHA
+              id: vars
+              run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
+            - name: Build
+              run: |
+                  npm ci
+                  npm run build
+                  mv dist panopto-dl
+                  zip -r panopto-dl.zip panopto-dl
 
             - name: Create Release
               id: create_release
@@ -24,8 +31,8 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
-                  tag_name: ${{ github.ref }}
-                  release_name: Release ${{ github.ref }}
+                  tag_name: release/${{ steps.vars.outputs.sha_short }}
+                  release_name: Release ${{ steps.vars.outputs.sha_short }}
                   draft: false
                   prerelease: false
 
@@ -37,5 +44,5 @@ jobs:
               with:
                   upload_url: ${{ steps.create_release.outputs.upload_url }}
                   asset_path: ./panopto-dl.zip
-                  asset_name: panopto-dl.zip
+                  asset_name: panopto-dl-${{ steps.vars.outputs.sha_short }}.zip
                   asset_content_type: application/zip

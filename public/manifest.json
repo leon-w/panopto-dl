@@ -16,6 +16,7 @@
       ]
     }
   ],
+  "options_page": "options.html",
   "background": {
     "service_worker": "js/background.js"
   },

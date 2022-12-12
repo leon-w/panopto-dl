@@ -1,17 +1,18 @@
 import Alert from "@mui/material/Alert";
+import CssBaseline from "@mui/material/CssBaseline";
 import Snackbar from "@mui/material/Snackbar";
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { VideoTable } from "./components/VideoTable";
+import { VideoTable } from "./VideoTable";
 
-type PopupState = {
+type PopupPageState = {
     snackbarOpen: boolean;
     snackbarMessage: string;
 };
 
-class Popup extends React.Component<object, PopupState> {
-    state: PopupState = {
+class PopupPage extends React.Component<object, PopupPageState> {
+    state: PopupPageState = {
         snackbarOpen: false,
         snackbarMessage: "",
     };
@@ -45,7 +46,8 @@ class Popup extends React.Component<object, PopupState> {
 
 ReactDOM.render(
     <React.StrictMode>
-        <Popup />
+        <CssBaseline />
+        <PopupPage />
     </React.StrictMode>,
     document.getElementById("root")
 );

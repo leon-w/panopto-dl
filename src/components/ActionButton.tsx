@@ -3,14 +3,16 @@ import CloseIcon from "@mui/icons-material/Close";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DownloadIcon from "@mui/icons-material/Download";
 import EditIcon from "@mui/icons-material/Edit";
+import SaveIcon from "@mui/icons-material/Save";
 import IconButton, { IconButtonTypeMap } from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import React from "react";
 
 export type ActionButtonProps = {
-    variant: "confirm" | "cancel" | "edit" | "download" | "delete";
+    variant: "confirm" | "cancel" | "edit" | "download" | "delete" | "save";
     onClick?: () => void;
     tooltip?: string;
+    disabled?: boolean;
 };
 
 export class ActionButton extends React.Component<ActionButtonProps> {
@@ -38,14 +40,21 @@ export class ActionButton extends React.Component<ActionButtonProps> {
                 color = "error";
                 icon = <DeleteIcon />;
                 break;
+            case "save":
+                color = "primary";
+                icon = <SaveIcon />;
         }
 
         const button = (
-            <IconButton color={color} onClick={() => this.props.onClick?.()}>
+            <IconButton disabled={this.props.disabled} color={color} onClick={() => this.props.onClick?.()}>
                 {icon}
             </IconButton>
         );
 
-        return this.props.tooltip ? <Tooltip title={this.props.tooltip}>{button}</Tooltip> : button;
+        return this.props.tooltip && !this.props.disabled ? (
+            <Tooltip title={this.props.tooltip}>{button}</Tooltip>
+        ) : (
+            button
+        );
     }
 }

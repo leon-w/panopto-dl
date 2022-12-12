@@ -25,6 +25,14 @@ A simple chrome extension to generate ffmpeg commands to download videos from TU
     -   paste the copied command into a command line to start the download
     -   click delete to remove the video from the list
 
+## Configuration 🔧
+
+Right click the extension icon and select 'Options' to open the options page.
+
+![](images/options.png)
+
+Currently, only the `ffmpeg` binary can be configured.
+
 ## Development 🚧
 
 To build the extension from source, you need NodeJS + npm.

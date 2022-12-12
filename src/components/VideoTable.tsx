@@ -167,13 +167,13 @@ export class VideoTable extends React.Component<VideoTableProps, VideoTableState
         await this.reloadVideos();
     }
 
-    handleDownloadVideo(video: Video): void {
-        navigator.clipboard.writeText(buildFfmpegCommand(video));
+    async handleDownloadVideo(video: Video): Promise<void> {
+        navigator.clipboard.writeText(await buildFfmpegCommand(video));
         this.props.snackbarCallback?.("Download Command copied.");
     }
 
-    handleDownloadAllVideos(): void {
-        navigator.clipboard.writeText(buildFfmpegBulkCommand(this.state.videos));
+    async handleDownloadAllVideos(): Promise<void> {
+        navigator.clipboard.writeText(await buildFfmpegBulkCommand(this.state.videos));
         this.props.snackbarCallback?.("Multi-Download Command copied.");
     }
 

@@ -1,8 +1,12 @@
+import platform from "platform";
+
+const isWindows = platform.os?.family?.includes?.("Win") ?? false;
+
 export type OptionKey = "ffmpegPath";
 export type OptionType = string;
 
 export const OPTION_DEFAULT_VALUES: Record<OptionKey, OptionType> = {
-    ffmpegPath: "ffmpeg",
+    ffmpegPath: isWindows ? "ffmpeg.exe" : "ffmpeg",
 };
 
 export abstract class OptionsManager {

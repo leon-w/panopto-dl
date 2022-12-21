@@ -34,5 +34,5 @@ export async function buildFfmpegBulkCommand(videos: Array<Video>): Promise<stri
     return videos
         .map(video => video.command.replace("{{title}}", escapeFilename(video.title)).replace("{{ffmpeg}}", ffmpegPath))
         .reverse()
-        .join(" && \\\n");
+        .join(" && ");
 }

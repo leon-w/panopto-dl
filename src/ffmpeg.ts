@@ -8,7 +8,7 @@ import { OptionsManager } from "./options";
 import { Video } from "./videos";
 
 export function escapeFilename(filename: string): string {
-    return filenamify(filename, { replacement: " " });
+    return filenamify(filename, { replacement: " ", maxLength: 255 });
 }
 
 export function generateFfmpegCommandTemplate(videoUrl: string, options?: { audioUrl?: string }): string {

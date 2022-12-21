@@ -31,8 +31,24 @@ export async function buildFfmpegCommand(video: Video): Promise<string> {
 
 export async function buildFfmpegBulkCommand(videos: Array<Video>): Promise<string> {
     const ffmpegPath = await OptionsManager.getStringOption("ffmpegPath");
+
+    // make file names unique by adding `(1)` etc. if required
+    const titles = videos.map(({ title }) => escapeFilename(title));
+    for (let i = 1; i < titles.length; i++) {
+        let title = titles[i];
+        const otherTitles = new Set(titles.filter((_, idx) => idx !== i));
+
+        let c = 1;
+        while (otherTitles.has(title)) {
+            title = `${titles[i]} (${c})`;
+            c++;
+        }
+
+        titles[i] = title;
+    }
+
     return videos
-        .map(video => video.command.replace("{{title}}", escapeFilename(video.title)).replace("{{ffmpeg}}", ffmpegPath))
+        .map((video, idx) => video.command.replace("{{title}}", titles[idx]).replace("{{ffmpeg}}", ffmpegPath))
         .reverse()
         .join(" && ");
 }

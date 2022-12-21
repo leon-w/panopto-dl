@@ -79,10 +79,10 @@ class VideoTableRow extends React.Component<VideoTableRowProps, VideoTableRowSta
                             defaultValue={this.props.video.title}
                         />
                     ) : (
-                        <Tooltip title={this.props.video.title}>
+                        <Tooltip title={this.props.video.title} placement="top">
                             <Typography
                                 variant="body2"
-                                sx={{ fontWeight: "bold", maxWidth: 250, minWidth: 250, pr: 0 }}
+                                sx={{ fontWeight: "bold", maxWidth: 300, minWidth: 300, pr: 0 }}
                                 noWrap={true}
                             >
                                 {this.props.video.title}

@@ -1,13 +1,40 @@
 import { generateFfmpegCommandTemplate } from "../ffmpeg";
 import { VideoManager } from "../videos";
 
+// this function is executed in the page context of the stream page
+// to generate a better title bases on data available on the page
+function getTitleForTumLiveVideo(): string {
+    const textElement = document.getElementById("watchWrapper")?.nextElementSibling;
+    if (textElement) {
+        return (textElement as HTMLElement).innerText
+            .split("\n")
+            .map(s => s.trim())
+            .filter(s => s)
+            .join(" - ");
+    } else {
+        return document.title;
+    }
+}
+
 export function registerTumLiveListener(): void {
     chrome.webRequest.onBeforeRequest.addListener(
         (details): void => {
             (async () => {
                 if (details.initiator === "https://live.rbg.tum.de") {
-                    const tab = await chrome.tabs.get(details.tabId);
-                    let title = (tab.title ?? "Video").replace("TUM-Live | ", "");
+                    let title: string;
+
+                    const injectionResults = await chrome.scripting.executeScript({
+                        target: { tabId: details.tabId },
+                        func: getTitleForTumLiveVideo,
+                    });
+
+                    if (injectionResults.length > 0 && typeof injectionResults[0].result === "string") {
+                        title = injectionResults[0].result;
+                    } else {
+                        // fallback to tab title in case there is a problem with getting the title
+                        const tab = await chrome.tabs.get(details.tabId);
+                        title = (tab.title ?? "Video").replace("TUM-Live | ", "");
+                    }
 
                     // indicate in the title that a video is only cam/presentation
                     if (details.url.includes("CAM.mp4/")) {

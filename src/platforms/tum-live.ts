@@ -4,7 +4,9 @@ import { VideoManager } from "../videos";
 // this function is executed in the page context of the stream page
 // to generate a better title bases on data available on the page
 function getTitleForTumLiveVideo(): string {
-    const textElement = document.getElementById("watchWrapper")?.nextElementSibling;
+    const textElement =
+        document.getElementById("bookmarks-desktop")?.nextElementSibling ??
+        document.getElementById("watchWrapper")?.nextElementSibling;
     if (textElement) {
         return (textElement as HTMLElement).innerText
             .split("\n")
@@ -49,7 +51,12 @@ export function registerTumLiveListener(): void {
                 }
             })();
         },
-        { urls: ["https://stream.lrz.de/vod/_definst_/*/chunklist_*.m3u8"] },
+        {
+            urls: [
+                "https://stream.lrz.de/vod/_definst_/*/chunklist_*.m3u8", // legacy
+                "https://edge.live.rbg.tum.de/vod/*/playlist.m3u8*",
+            ],
+        },
         []
     );
 }

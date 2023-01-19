@@ -30,6 +30,7 @@
     "https://tum.cloud.panopto.eu/*",
     "https://*.cloudfront.net/*",
     "https://stream.lrz.de/*",
-    "https://live.rbg.tum.de/*"
+    "https://live.rbg.tum.de/*",
+    "https://edge.live.rbg.tum.de/*"
   ]
 }

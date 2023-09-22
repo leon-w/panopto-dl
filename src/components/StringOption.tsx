@@ -4,8 +4,8 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import React from "react";
 
-import { OptionKey, OptionsManager } from "../options";
 import { ActionButton } from "./ActionButton";
+import { OptionKey, OptionsManager } from "../options";
 
 type StringOptionProps = {
     title: string;

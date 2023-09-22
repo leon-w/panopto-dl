@@ -16,10 +16,10 @@ import Typography from "@mui/material/Typography";
 import { formatDistance, formatRelative } from "date-fns";
 import React from "react";
 
-import { buildFfmpegBulkCommand, buildFfmpegCommand } from "../ffmpeg";
-import { Video, VideoManager } from "../videos";
 import { ActionButton } from "./ActionButton";
 import { VideoTypeChip } from "./VideoTypeChip";
+import { buildFfmpegBulkCommand, buildFfmpegCommand } from "../ffmpeg";
+import { Video, VideoManager } from "../videos";
 
 type VideoTableRowProps = {
     video: Video;
@@ -188,7 +188,7 @@ export class VideoTable extends React.Component<VideoTableProps, VideoTableState
         }
 
         return (
-            <Stack>
+            <Stack sx={{ display: "block" }}>
                 <TableContainer sx={{ maxHeight: 400, overflowX: "hidden" }}>
                     <Table size="small" stickyHeader>
                         <TableHead>

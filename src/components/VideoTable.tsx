@@ -188,7 +188,7 @@ export class VideoTable extends React.Component<VideoTableProps, VideoTableState
         }
 
         return (
-            <Stack>
+            <Stack sx={{ display: "block" }}>
                 <TableContainer sx={{ maxHeight: 400, overflowX: "hidden" }}>
                     <Table size="small" stickyHeader>
                         <TableHead>

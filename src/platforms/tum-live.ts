@@ -4,9 +4,7 @@ import { VideoManager } from "../videos";
 // this function is executed in the page context of the stream page
 // to generate a better title bases on data available on the page
 function getTitleForTumLiveVideo(): string {
-    const textElement =
-        document.getElementById("bookmarks-desktop")?.nextElementSibling ??
-        document.getElementById("watchWrapper")?.nextElementSibling;
+    const textElement = document.getElementById("streams-box")?.nextElementSibling;
     if (textElement) {
         return (textElement as HTMLElement).innerText
             .split("\n")
